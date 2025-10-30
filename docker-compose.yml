@@ -1,0 +1,41 @@
+services:
+  grafana:
+    image: grafana/otel-lgtm
+    ports:
+      - "3000:3000" # Grafana UI
+      - "4317:4317" # OTLP gRPC
+      - "4318:4318" # OTLP HTTP
+    networks:
+      - ebpf_default
+  beyla:
+    image: grafana/beyla:latest
+    privileged: true
+    pid: host
+    environment:
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=dev
+      - BEYLA_CONFIG_PATH=/etc/beyla.yml
+      - BEYLA_LOG_LEVEL=INFO
+    volumes:
+      - ./beyla.yml:/etc/beyla.yml:ro
+      - /sys:/sys:ro
+      - /lib/modules:/lib/modules:ro
+      - /sys/kernel/security:/sys/kernel/security:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    networks:
+      - ebpf_default
+
+  perl-app:
+    build: ./app
+    working_dir: /usr/src/app
+    volumes:
+      - ./app:/usr/src/app
+    command: ["perl", "app.pl"]
+    ports:
+      - "1337:1337"
+    networks:
+      - ebpf_default
+
+networks:
+  ebpf_default:
+    external: true
+    name: ebpf_default
