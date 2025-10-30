@@ -1,5 +1,7 @@
 # Prova de Conceito: Instrumentação de Aplicações Legadas com eBPF e Grafana Beyla
 
+<p align="center"> <img src="https://grafana.com/media/blog/beyla-opentelemetry/meta6.png?w=764" style="display: block; margin-left: auto; margin-right: auto;"/> </p>
+
 <p align="center">
 <a href="https://grafana.com/docs/beyla/latest/">
 <img src="https://img.shields.io/badge/Grafana-Beyla-blue" alt="Grafana Beyla"/>
