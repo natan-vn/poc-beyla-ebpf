@@ -316,9 +316,6 @@ networks:
     # Teste o endpoint de produtos
     curl http://localhost:1337/products
     # Resposta: {"products":["book","pen","laptop"]}
-
-    # Gere alguns erros (endpoint inexistente)
-    curl http://localhost:1337/error
     ```
 
 2.  **Acesse o Grafana:**
